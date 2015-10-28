@@ -1,0 +1,404 @@
+
+<plaintext>
+Financial Modeling With C
+------------------------------------------------------
+
+The code of the following programs will introduce
+several financial modeling concepts ranged from very simple to
+complex (recursion) and their solutions. 
+
+Future Value
+-------------
+If one makes a series of regular deposits for a certain interest
+rate for a certain number of periods, the amount of money
+accrued at the end of the periods is the future value. 
+
+The FV formula is: FV = PMT * ((1+i)^N-1)/i where PMT is the periodic
+deposit, i is the interest rate and N is the number of periods.
+
+
+The program should prompt for the monthly deposit, the annual
+interest rate (e.g. 8 for 8%) and then divide that number by 12
+and by 100 for the true monthly interest rate. The number of
+periods is the number of years multiplied by 12.
+
+
+Since the power function takes doubles as arguments (along with
+exp, log and most of the other math functions), all variables
+are doubles (although type casting is possible). Since the scanf
+input routine takes only floats as arguments, a temp
+variable of type float is introduced. Also note that when
+reading with the scanf routine, one must pass the address of the
+variable to the routine (i.e. scanf("%f",&temp)) and not the
+variable itself. Some compilers such as Turbo C will alert you
+if you forget to pass by reference but most of them will simply
+let you suffer. Also you must remember to include math.h or else
+pow will return garbage cleverly disguised as a valid number.
+
+
+This is the code for the future value program:
+
+----------------------------------------------
+#include <stdio.h>
+#include <math.h>
+main()
+{
+   double interest, pmt, periods, fv;
+   float temp;
+   printf("Monthly deposit                 : ");
+   scanf("%f",&temp); pmt=temp;
+   printf("Annual Interest (e.g. 8 for 8%) : ");
+   scanf("%f",&temp); interest=temp/100/12;
+   printf("Number of years                 : ");
+   scanf("%f",&temp); periods=temp*12;
+   fv=pmt*((pow(1+interest,periods)-1)/interest);
+   printf("Future value of investment      : %1.2f\n",fv);
+}
+
+
+
+Present Value
+------------------
+The present value is the amount of the loan that can be obtained
+for the i interest rate, PMT monthly payment and N number of
+periods. The formula is PV=PMT * (1-(1+i)^-N)/i.
+
+
+
+#include <stdio.h>
+#include <math.h>
+main()
+{
+   double interest, pmt, periods, pv;
+   float temp;
+   printf("Monthly payment                 : ");
+   scanf("%f",&temp); pmt=temp;
+   printf("Annual Interest (e.g. 8 for 8%) : ");
+   scanf("%f",&temp); interest=temp/100/12;
+   printf("Number of years                 : ");
+   scanf("%f",&temp); periods=temp*12;
+   pv=pmt*((1-pow(1+interest,-periods))/interest);
+   printf("Amount to be borrowed           : %1.2f\n",pv);
+}
+
+
+Most spread sheets provide PV and FV functions. There are
+situations where the FV and PV are known but either i or N need
+to be calculated. FV and PV are linked by the formula:
+FV = PV * (1+i)^N or (1+i)^N=FV/PV. Applying natural logarithm
+to both sides the equation becomes N*ln(1+i)=ln(FV/PV).
+N is therefore (ln(FV)-ln(PV))/ln(1+i).
+
+
+Interest rate
+--------------------------
+The interest rate calculation is given by:
+
+ln(1+i)=(ln(FV)-ln(PV))/N. After applying exp to both sides the
+equation becomes 1+i=exp((ln(FV)-ln(PV))/N) or
+i=exp((ln(FV)-ln(PV))/N)-1.
+The program that calculates i through the FV PV link is:
+--------------------------
+
+
+#include <stdio.h>
+#include <math.h>
+main()
+{
+   double interest, periods, fv, pv;
+   float temp;
+   printf("Future Value    : ");
+   scanf("%f",&temp); fv=temp;
+   printf("Present Value   : ");
+   scanf("%f",&temp); pv=temp;
+   printf("Number of years : ");
+   scanf("%f",&temp); periods=temp*12;
+   interest=(exp((log(fv)-log(pv))/periods)-1)*1200;
+   printf("Interest Rate   : %1.2f\n",interest);
+}
+
+ 
+ 
+Net Present Value
+------------------
+It's difficult to imagine a bank account with nothing but
+regular and equal deposits (i.e positive cash flows) and no
+withdrawals (i.e. negative cash flows). 
+<br>Net present value addresses the worth of a series of unequal and different sign
+cash flows. The NPV formula is:
+
+CF[1]/(1+i)^1+CF[2]/(1+i)^2+..CF[N]/(1+i)^N where CF are the
+cash flows in the respective periods, N is the number of periods
+and i is the considered interest rate.
+
+
+The NPV function would look like this:
+--------------------------------------
+
+double pv(a,intrate,numflows)
+double a[],intrate; int numflows;
+{
+   int i;
+   double temp=0;
+   for (i=1;i<=numflows;i++) {
+      if (intrate==0) temp +=a[i-1];
+      else temp +=(a[i-1]/pow(1+intrate/100,i));
+   }
+   return(temp);
+}
+
+ 
+
+If the interest rate is 0 then the denominator is 1. Therefore,
+if i=0 the net present value is the sum of cash flows. As i
+becomes larger NPV gets smaller. Consider the following example:
+
+
+Here's an example: You buy a mountain cabin for $25,000. During the first four
+years you are able to rent it out and you collect $3,500, $100,
+$4000 and $100 respectively. The fifth year you have a negative
+cash flow of $300 due to repairs. 
+
+The cash flows for years 6 through 11 are : 4000 2300 -150 5600 321 -100. 
+
+In the twelfth year you sell the cabin for $24,900. You ask yourself, would you
+have been better off depositing your $25,000 at 6% or is the
+series of cash flows generated by your investment greater in
+value? Solving the NPV equation for 6% gives a net present value
+of $26,675.49 or $1,675.49 more than your initial investment.
+Plotting the Net Present Value as a function of i between -5%
+and 100% will illustrate the inverse proportionality between
+the two values.
+
+
+
+|
+|. NPV(0)=$44,271
+|-.              Net Present Value
+|  .             as a function of interest
+|-  .
+|      . NPV(5)=$28,858.16
+|-        .  NPV(6)=$26,675.49
+|             .
+|-                . . . . NPV(20)=$11,091.59
+|
+-=-=-=-=-=-=-=-=-=-=-=-=-
+|     |     |     |     |
+
+
+ 
+Internal Rate of Return
+----------------------------
+
+When dealing with multiple cash flows, often times the required
+value is the interest rate that would generate the NPV equal to
+the initial investment. In our example, the interest rate that
+would generate a $25,000 NPV to match the initial investment is
+6.847%. 
+
+This interest rate is called the Internal Rate of Return
+(IRR) and it cannot be computed analytically. There are instances
+when several solutions are possible and sometimes there are no
+solutions.
+
+
+The program should look only for solutions that are
+financially acceptable (i.e. between 0% and 200%) and it should
+return the lowest if more than one are available. 
+The irr
+function should look for a solution by moving on the graph from
+0% to the right in assigned increments while trying to match the
+initial investment with the NPV generated by the current
+interest rate. 
+
+If the difference between Investment and NPV
+changes signs, then the function has moved too far and it should
+step back to the prior tick and continue with smaller
+increments. This process should invoke itself until the
+difference is smaller then a ten thousandth of the NPV.
+
+
+This time the program will accept input from a file. Note
+that the program expects the name of the input file as its
+argument. However, if no arguments are passed the user is
+prompted for the file name. Note that the getvals function uses
+pointers to the variables in order to be able to modify their
+values globally. The irr function keeps track of the increment
+and the current interest rate in the same manner:
+
+
+irr(a,invest,&intrate,&inc,numflows)
+
+
+
+However note that when the function is invoking itself recursively the "&" address symbol
+is not used because you are already dealing with a pointer. The
+program reads the annual interest rate, the initial investment
+and the cash flows. If the interest rate is not 0 the NPV is
+calculated. Else, the programs assumes that the user is
+searching for IRR. 
+
+To run the program with the example above
+create a file containing the values on separate lines or on the
+same line. E.g. file "data.dat" contains the line:
+-------------------------------------------------------------------
+
+0 -25000 3500 100 4000 100 -300 4000 2300 -150 5600 321 -100 24900
+-------------------------------------------------------------------
+
+IRR and NPV program listing:
+
+------------------
+#include <stdio.h>
+#include <math.h>
+#define MAX 500
+main (argc,argv)
+int argc;
+char *argv[];
+{
+    FILE *fopen(), *f;
+    char fn[80];
+    double a[MAX],invest,intrate,inc,pv(),irr();
+    int numflows;
+    if (argc==2) strcpy(fn,argv[1]);
+    else {
+       printf("File > ");
+       gets(fn);
+    }
+    if ((f = fopen(fn,"r"))==NULL) {
+       printf("Can not open %s\n",fn);
+       exit(1);
+    }
+    getvals(f,a,&intrate,&invest,&numflows);
+    fclose(f);
+    if (intrate!=0) printf("pv=%1.3f\n",pv(a,intrate,numflows));
+    else
+       {
+         inc=10;
+         printf("irr=%1.3f\n",irr(a,invest,&intrate,&inc,numflows));
+       }
+}
+
+getvals(f,a,intrate,invest,numflows)
+FILE *f; double a[],*intrate,*invest; int *numflows;
+{
+   float temp;
+   int i;
+   fscanf(f,"%f",&temp); *intrate=temp;    /*fscanf reads only floats*/
+   fscanf(f,"%f",&temp); *invest=fabs((double) temp);
+   for (i=0;i < MAX;i++) a[i]=0;
+   i=0;
+   while (fscanf(f,"%f",&temp)!=EOF) a[i++]=temp;
+   *numflows=i;
+}
+
+double pv(a,intrate,numflows)
+double a[],intrate; int numflows;
+{
+   int i;
+   double temp=0;
+   for (i=1;i<=numflows;i++) {
+      if (intrate==0) temp +=a[i-1];
+      else temp +=(a[i-1]/pow(1+intrate/100,i));
+   }
+   return(temp);
+}
+
+double irr(a,invest,intrate,inc,numflows)
+double a[],invest,*intrate,*inc; int numflows;
+{
+   double tol,d1,d2;
+   tol=invest/10000;  /*this will grant precision past 3rd decimal*/
+   d1=invest-pv(a,*intrate + *inc,numflows);
+   printf("Int Rate %1.3f generates delta=%1.3f\n",(*intrate + *inc),d1);
+   if (((*intrate+*inc)<0) || ((*intrate+*inc)>200)) {
+      printf("\nNo solution\n");
+      return(EOF);
+   }
+   else {
+      if (fabs(d1)<=tol) return(*intrate+*inc);
+      else {
+         d2=invest-pv(a,*intrate,numflows);
+         if (d2*d1<0) *inc /= 10;
+         else *intrate +=*inc;
+         return(irr(a,invest,intrate,inc,numflows));
+      }
+    }
+}
+
+
+
+Amortization
+------------
+Amortization comes from French and liberally translated means
+taking something to death in tiny amounts. When you consider that
+one must pay for a mortgage monthly for thirty years, the
+description is fitting. When you borrow money from a bank you
+must pay back both the principal and the interest. Each payment
+you make contains a portion of the principal and a portion of the
+interest. During the beginning periods one pays a very small
+amount for the principal and a large amount for the interest.
+Eventually, after building some equity, things change and a large
+portion of the payment goes to the principal. 
+
+The following
+program calculates the payment for a certain loan, the principal
+balance, the principal and the interest portion of each payment.
+A table of these values is printed for each period. To make
+things interesting, I'll request the program to bring in the
+variables from the command line. Thus, the program must be
+invoked like this from the command line: 
+
+
+amort 100000 10.5 30
+
+
+in order to amortize a
+$100,000 loan for a 10.50% annual interest rate lasting for 30
+years. Modify the program to prompt you for the values of the
+three variables. 
+
+The payment formula is:
+paymemt=loan amount*(monthly int/(1-1/(1+monint^periods)))
+
+
+Amortization program source:
+----------------------------
+
+#include <stdio.h>
+#include <math.h>
+main (argc,argv)
+int argc;
+char *argv[];
+{
+    double amount,annint,years,periods,monint,pmt,intrate,
+           principal,priorprinc,princpaid;
+    int curperiod;
+    if (argc!=4) {
+        printf("Format is <amort amount interest years>\n");
+        exit(EOF);
+     }
+    else {
+       amount=atof(argv[1]);
+       annint=atof(argv[2]);
+       years=atof(argv[3]);
+    }
+    periods = years*12;
+    monint=annint/100/12;
+    pmt=amount*(monint/(1-1/(pow(1+monint,periods))));
+    curperiod=0;
+    principal=amount;
+    intrate=monint*principal;
+    princpaid=pmt-intrate;
+    printf("Monthly Payment                  :%1.2f\n",pmt);
+    printf("Mon Balance Interest Principal\n\n");
+    while (curperiod <=periods) {
+      printf("%3d %9.2f %7.2f %7.2f\n",curperiod++,principal,
+             intrate,princpaid);
+      priorprinc=principal;
+      principal=priorprinc-(pmt-(monint*priorprinc));
+      intrate=monint*principal;
+      princpaid=pmt-intrate;
+  }
+}
+
