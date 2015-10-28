@@ -1,0 +1,76 @@
+
+<HTML>
+<HEAD>
+<TITLE>Sample Shell Sort Algorithm</TITLE>
+<SCRIPT LANGUAGE="JAVASCRIPT">
+function ClearForm(form){
+//shell sort by eddy vasile
+//arrays start at index 0
+   form.num0.value  ="";
+   form.num1.value  ="";
+   form.num2.value  ="";
+   form.num3.value  ="";
+   form.num4.value  ="";
+}
+
+   function shellSort(form)
+   {
+      var myArray = new Array(5);
+      var gap, i, j, tempNum;
+      myArray[0]=parseFloat(form.num0.value);
+      myArray[1]=parseFloat(form.num1.value);
+      myArray[2]=parseFloat(form.num2.value);
+      myArray[3]=parseFloat(form.num3.value);
+      myArray[4]=parseFloat(form.num4.value);
+      n=myArray.length;
+      for (gap=Math.floor(n/2); gap>0; gap=Math.floor(gap/2)) {
+         for (i=gap; i<n; i++) {
+            for (j=i-gap; j>=0 && myArray[j]>myArray[j+gap]; j=j-gap) {
+                tempNum = myArray[j];
+                myArray[j]=myArray[j+gap];
+                myArray[j+gap] = tempNum;
+            }
+         }
+      }
+      form.num0.value  =myArray[0];
+      form.num1.value  =myArray[1];
+      form.num2.value  =myArray[2];
+      form.num3.value  =myArray[3];
+      form.num4.value  =myArray[4];
+   }
+
+</SCRIPT>
+</HEAD>
+<BODY>
+<CENTER>
+<H1>Sample Shell Sort Algorithm</H1>
+<HR size=10>
+</center>
+<h2>Please enter five unsorted numbers in the boxes below</h2>
+<FORM>
+<TABLE>
+  <TR>
+    <TD>First Number</td><td><INPUT TYPE=TEXT NAME=num0 value=""></TD>
+  </TR>
+  <TR>
+    <TD>Second Number</td><td><INPUT TYPE=TEXT NAME=num1 value=""></TD>
+  </TR>
+  <TR>
+    <TD>Third Number</td><td><INPUT TYPE=TEXT NAME=num2 value=""></TD>
+  </TR>
+  <TR>
+    <TD>Fourth Number</td><td><INPUT TYPE=TEXT NAME=num3 value=""></TD>
+  </TR>
+  <TR>
+    <TD>Fifth number</td><td><INPUT TYPE=TEXT NAME=num4 value=""></TD>
+  </TR>
+</TABLE>
+<p>
+<INPUT TYPE="button" VALUE="Sort" onClick="shellSort(this.form)">
+<INPUT TYPE="button"  VALUE="Reset" onClick="ClearForm(this.form)">
+</FORM>
+</CENTER>
+<p>
+<hr size=10>
+</BODY>
+</HTML>
