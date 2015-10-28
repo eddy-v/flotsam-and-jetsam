@@ -1,0 +1,74 @@
+
+<head>
+<title>Latin Phrases</title>
+</head>
+<body>
+<script language=javascript src=latdat.js></script>
+<script language=javascript>
+function shellSort(myArray,n)    {
+   var gap, i, j, tempNum;
+   for (gap=Math.floor(n/2); gap>0; gap=Math.floor(gap/2)) {
+         for (i=gap; i<n; i++) {
+            for (j=i-gap; j>=0 && myArray[j]>myArray[j+gap]; j=j-gap) {
+                tempNum = myArray[j];
+                myArray[j]=myArray[j+gap];
+                myArray[j+gap] = tempNum;
+            }
+         }
+   }
+}
+function displayPhrases(form){
+   var wordin = "";
+   var LatEng = new Array();
+   initArray(LatEng);
+   wordin = form.InSeed.value.toUpperCase();
+   if (wordin.length==0) wordin="=";
+   document.open();
+   document.write("<HTML><HEAD>");
+   document.write("<TITLE>Latin Phrases</TITLE>");
+   document.write("</HEAD><BODY BGCOLOR=FFFFFF TEXT=000000>");
+   document.write("<B><BR>");
+   document.write("<FONT COLOR='#00FFFF' SIZE=6>Latin Phrases</FONT><BR>");
+   document.write("<FONT COLOR='#0FF000' SIZE=5>Meeting Your Criteria</FONT><BR>");
+   document.write("<FONT COLOR='#0000FF' SIZE=3>Use the <i>Back</i> option to return to the menu.</FONT><BR>");
+   document.write("<FONT COLOR='#000F00' SIZE=2><BR>");
+   shellSort(LatEng,LatEng.length);
+   for (i=0;i<LatEng.length;i++) {
+      tempString=LatEng[i].toUpperCase();
+      tempNum=tempString.indexOf(wordin);
+      if (tempNum>=0) document.write(LatEng[i]+".<br>");
+   }
+   document.write("</B></FONT></BODY></HTML>");
+   document.close();
+}
+function clearForm(form){
+   form.InSeed.value ="";
+}
+
+</script>
+<CENTER>
+<H1>Latin Phrase Finder</H1>
+<HR SIZE=10>
+</CENTER>
+<B>
+This program generates a window with Latin / English phrases. Enter 
+the English or Latin word in order to obtain phrases that include it. If your 
+input is null, the program will return all the phrases available.
+<BR>
+</B>
+<FORM>
+   <TABLE>
+     <TR>
+       <TD>Enter a Latin or English word in the box below and click on Find</TD>
+     </TR>
+     <TR>
+       <TD><INPUT name=InSeed></TD>
+     </TR>
+   </TABLE>
+   <BR>
+   <INPUT onclick=displayPhrases(this.form) type=button value=Find> 
+   <INPUT onclick=clearForm(this.form) type=button value=Clear> 
+</FORM>
+<HR SIZE=10>
+</BODY>
+
