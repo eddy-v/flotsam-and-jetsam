@@ -1,0 +1,169 @@
+
+
+<script language="JAVASCRIPT">
+//Superbowl database and javaScript Programming example
+//Eddy Vasile
+function initSuperBowl(superBowl) {
+   superBowl[0]= "1967       I Packers    35    Chiefs    10   N";
+   superBowl[1]= "1968      II Packers    33    Raiders   14   N";
+   superBowl[2]= "1969     III Jets       16    Colts     7    A";
+   superBowl[3]= "1970      IV Chiefs     23    Vikings   7    A";
+   superBowl[4]= "1971       V Colts      16    Cowboys   13   A";
+   superBowl[5]= "1972      VI Cowboys    24    Dolphins  3    N";
+   superBowl[6]= "1973     VII Dolphins   14    Redskins  7    A";
+   superBowl[7]= "1974    VIII Dolphins   24    Vikings   7    A";
+   superBowl[8]= "1975      IX Steelers   16    Vikings   6    A";
+   superBowl[9]= "1976       X Steelers   21    Cowboys   17   A";
+   superBowl[10]="1977      XI Raiders    32    Vikings   14   A";
+   superBowl[11]="1978     XII Cowboys    27    Broncos   10   N";
+   superBowl[12]="1979    XIII Steelers   35    Cowboys   31   A";
+   superBowl[13]="1980     XIV Steelers   31    Rams      19   A";
+   superBowl[14]="1981      XV Raiders    27    Eagles    10   A";
+   superBowl[15]="1982     XVI 49ers      26    Bengals   21   N";
+   superBowl[16]="1983    XVII Redskins   27    Dolphins  17   N";
+   superBowl[17]="1984   XVIII Raiders    38    Redskins  9    A";
+   superBowl[18]="1985     XIX 49ers      38    Dolphins  16   N";
+   superBowl[19]="1986      XX Bears      46    Patriots  10   N";
+   superBowl[20]="1987     XXI Giants     39    Broncos   20   N";
+   superBowl[21]="1988    XXII Redskins   42    Broncos   10   N";
+   superBowl[22]="1989   XXIII 49ers      20    Bengals   16   N";
+   superBowl[23]="1990    XXIV 49ers      55    Broncos   10   N";
+   superBowl[24]="1991     XXV Giants     20    Bills     19   N";
+   superBowl[25]="1992    XXVI Redskins   37    Bills     24   N";
+   superBowl[26]="1993   XXVII Cowboys    52    Bills     17   N";
+   superBowl[27]="1994  XXVIII Cowboys    30    Bills     13   N";
+   superBowl[28]="1995    XXIX 49ers      49    Chargers  26   N";
+   superBowl[29]="1996     XXX Cowboys    27    Steelers  17   N";
+   superBowl[30]="1997    XXXI Packers    35    Patriots  21   N";
+   superBowl[31]="1998   XXXII Broncos    31    Packers   24   A";
+   superBowl[32]="1999  XXXIII Broncos    34    Falcons   19   A";
+   superBowl[33]="2000   XXXIV Rams       23    Titans    16   N";
+   superBowl[34]="2001    XXXV Ravens     34    Giants    7    A";
+   superBowl[35]="2002   XXXVI Patriots   20    Rams      17   A";
+   superBowl[36]="2003  XXXVII Buccaneers 48    Raiders   21   N";
+   superBowl[37]="2004 XXXVIII Patriots   32    Panthers  29   A";
+   superBowl[38]="2005   XXXIX Patriots   24    Eagles    21   A";
+   superBowl[39]="2006      XL Steelers   21    Seahawks  10   A";
+   superBowl[40]="2007     XLI Colts      29    Bears     17   A";
+   superBowl[41]="2008    XLII Giants     17    Patriots  14   N";
+   superBowl[42]="2009   XLIII Steelers   27    Cardinals 23   A";
+   superBowl[43]="2010    XLIV Saints     31    Colts     17   N";
+   superBowl[44]="2011     XLV Packers    31    Steelers  25   N";
+   superBowl[45]="2012    XLVI Giants     21    Patriots  17   N";
+   superBowl[46]="2013   XLVII Ravens     34    49ers     31   A";
+   superBowl[47]="2014  XLVIII Seahawks   43    Broncos    8   N";
+}
+function putValues(form) {
+   var superBowl = new Array();
+   initSuperBowl(superBowl);
+   var temp=superBowl[form.Year.selectedIndex];
+   form.yr.value=temp.substr(0,4);
+   form.bowlNum.value=temp.substr(5,7);      
+   form.winningTeam.value=temp.substr(13,10); 
+   form.winningScore.value=temp.substr(24,2); 
+   form.losingTeam.value=temp.substr(30,10);   
+   form.losingScore.value=temp.substr(40,4);  
+   form.conference.value=temp.substr(45,1); 
+}
+</script>
+<form>
+  <table border="1">
+    <tr> 
+      <td><align = center>Year</align></td>
+      <td><align = center>Bowl 
+        Nr</align></td>
+      <td><align = center>Winning 
+        Team</align></td>
+      <td><align = center>Winning 
+        Score</align></td>
+      <td><align = center>Losing 
+        Team</align></td>
+      <td><align = center>Losing 
+        Score</align></td>
+      <td><align = center>Win 
+        Conference</align></td>
+    </tr>
+    <tr> 
+      <td> 
+        <input name="yr" size="15" type="TEXT"/>
+        </td>
+      <td> 
+        <input name="bowlNum" size="15" type="TEXT"/>
+
+        </td>
+      <td> 
+        <input name="winningTeam" size="15" type="TEXT"/>
+        </td>
+      <td> 
+        <input name="winningScore" size="15" type="TEXT"/>
+        </td>
+      <td> 
+        <input name="losingTeam" size="15" type="TEXT"/>
+        </td>
+
+      <td> 
+        <input name="losingScore" size="15" type="TEXT"/>
+        </td>
+      <td> 
+        <input name="conference" size="15" type="TEXT"/>
+        </td>
+    </tr>
+  </table>
+  <input value="Calculate" name="Get Data" onclick="putValues(this.form)" type="button"/>
+  <br/>
+  <b>Please select a year and press the <i>Calculate</i> button</b>  
+  <hr size="10"/>
+<select name="Year" size="10">
+<option selected/>1967
+<option/>1968
+<option/>1969
+<option/>1970
+<option/>1971
+<option/>1972
+<option/>1973
+<option/>1974
+<option/>1975
+<option/>1976
+<option/>1977
+<option/>1978
+<option/>1979
+<option/>1980
+<option/>1981
+<option/>1982
+<option/>1983
+<option/>1984
+<option/>1985
+<option/>1986
+<option/>1987
+<option/>1988
+<option/>1989
+<option/>1990
+<option/>1991
+<option/>1992
+<option/>1993
+<option/>1994
+<option/>1995
+<option/>1996
+<option/>1997
+<option/>1998
+<option/>1999
+<option/>2000
+<option/>2001
+<option/>2002
+<option/>2003
+<option/>2004
+<option/>2005
+<option/>2006
+<option/>2007
+<option/>2008
+<option/>2009
+<option/>2010
+<option/>2011
+<option/>2012
+<option/>2013
+<option/>2014
+</select>
+<br clear="all"/>
+<hr size="10"/>
+</form>
+<br/>
