@@ -1,0 +1,78 @@
+
+<html>
+<head>
+<title>HM Agent X code breaker</title>
+<script language="JavaScript">
+<!--
+//decoder - by Eddy Vasile
+function clearForm(form){
+   form.InSeed.value  ="";
+}
+function decode(form){
+var codeMatrix = new Array(
+new Array('i','e','r','t','w','h','d','m','b','f','q','j','z','o','c','u','l','a','v','n','s','x','p','y','k','g'),
+new Array('e','q','y','b','k','v','c','g','a','w','l','z','o','x','m','s','n','i','p','h','r','j','u','f','t','d'),
+new Array('o','l','z','e','g','r','b','c','y','p','u','n','w','f','a','x','t','d','q','j','m','s','k','h','v','i'),
+new Array('v','w','o','q','z','i','a','y','m','l','n','t','r','p','h','k','u','c','d','g','d','f','s','e','j','b'),
+new Array('b','a','l','c','o','y','i','t','f','v','r','m','s','h','q','z','j','e','g','p','x','w','n','d','u','k'),
+new Array('m','g','v','r','h','q','l','p','e','a','z','k','y','c','x','o','f','s','n','u','t','d','w','b','i','j'),
+new Array('g','f','q','x','c','m','v','b','r','y','k','h','i','l','s','j','p','u','e','d','n','t','o','w','z','a'),
+new Array('t','y','w','j','f','a','q','u','h','i','o','g','k','e','d','l','z','p','s','b','v','n','r','e','m','x'),
+new Array('a','p','s','o','x','d','e','k','l','h','v','w','g','j','t','y','i','b','z','r','q','u','m','n','f','c'),
+new Array('j','x','t','h','u','k','z','w','n','m','s','a','q','i','y','g','e','o','r','c','p','b','v','l','d','f'),
+new Array('z','t','u','l','b','j','x','i','s','o','g','f','h','r','n','d','m','q','y','k','w','p','c','v','a','e'),
+new Array('o','c','e','k','s','u','f','x','i','d','b','p','m','g','v','h','a','l','t','q','y','r','z','j','n','w'),
+new Array('f','u','m','n','t','g','y','*','d','j','x','e','l','v','b','r','k','z','o','w','c','q','i','p','h','s'),
+new Array('n','o','x','m','y','s','w','v','j','r','d','c','p','z','k','q','b','t','f','a','g','h','e','i','l','u'),
+new Array('l','n','d','i','e','o','s','c','z','k','h','r','b','a','w','f','x','j','m','t','u','y','g','q','p','v'),
+new Array('r','i','p','s','q','x','u','f','v','c','t','l','n','d','z','w','g','h','b','e','j','k','a','m','o','y'),
+new Array('y','b','g','d','p','f','h','z','x','u','a','s','j','w','e','n','b','k','c','l','i','m','t','o','q','r'),
+new Array('p','z','a','f','v','c','t','s','g','n','e','o','d','k','u','m','y','w','j','i','b','l','h','x','r','q'),
+new Array('w','v','i','p','l','n','o','r','k','t','j','q','e','u','g','b','s','f','h','x','a','c','d','z','y','m'),
+new Array('h','k','j','a','m','t','r','e','w','s','p','d','x','y','i','v','c','n','l','o','f','g','q','u','b','z'),
+new Array('x','m','k','z','j','l','p','h','u','q','c','y','v','s','r','a','d','g','w','f','o','i','b','t','e','n'),
+new Array('d','s','f','w','r','b','g','n','p','e','i','x','u','m','l','t','q','y','a','v','h','z','j','k','c','o'),
+new Array('s','d','h','v','a','z','n','j','t','b','y','i','i','q','o','p','w','r','u','m','k','e','f','g','x','l'),
+new Array('u','j','n','g','i','p','k','l','q','z','m','v','t','b','f','c','o','x','d','s','e','a','y','r','w','h'),
+new Array('q','h','b','y','n','e','m','d','c','g','w','u','f','t','j','i','r','v','k','z','l','o','x','a','s','p'),
+new Array('k','r','c','u','d','w','j','q','o','x','f','b','a','n','p','e','h','m','i','y','z','v','l','s','g','t')
+);
+ var codeStr;
+ codeStr=form.InSeed.value.toUpperCase();
+ if (codeStr.length % 2 != 0 || codeStr.length == 0) alert("bogus code - must be an even number of characters")
+   else {
+    i=0;
+    decodedStr="";
+    while(i<=codeStr.length-2) {
+     oX=codeStr.charCodeAt(i++)-65;
+     oY=codeStr.charCodeAt(i++)-65;
+     decodedStr=decodedStr+codeMatrix[oY][oX];
+    }
+    document.write("<font size = 7>|"+decodedStr+"|</font>");
+   }
+}
+-->
+</script>
+</head>
+<body>
+<h1>HM Agent X code breaker</h1>
+<hr size=10>
+<form NAME="ECV" method=POST>
+<table width=100% border=5 CELLPADDING=5>
+<tr>
+<th bgcolor ="#FFFFFF" colspan=1 valign=left></th>
+</tr>
+<tr>
+<td>Enter coded sequence WITHOUT spaces</td>
+</tr>
+<tr>
+<td><INPUT TYPE=TEXT NAME=InSeed size=160></td>
+</tr>
+</table>
+<input TYPE="button" VALUE="Decrypt" onClick="decode(this.form)">
+<input TYPE="reset"  VALUE="Reset" onClick="clearForm(this.form)">
+</form>
+<hr size=10>
+</body>
+</html>
+
