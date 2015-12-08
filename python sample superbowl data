@@ -1,0 +1,72 @@
+# Super Bowl database to illustrate Python multidim dictionaries
+# eddy vasile
+sbowl={                                                          
+1967:['I','Packers',35,'Chiefs',10,'NFC'],
+1968:['II','Packers',33,'Raiders',14,'NFC'],
+1969:['III','Jets',16,'Colts',7,'AFC'],
+1970:['IV','Chiefs',23,'Vikings',7,'AFC'],
+1971:['V','Colts',16,'Cowboys',13,'AFC'],
+1972:['VI','Cowboys',24,'Dolphins',3,'NFC'],
+1973:['VII','Dolphins',14,'Redskins',7,'AFC'],
+1974:['VIII','Dolphins',24,'Vikings',7,'AFC'],
+1975:['IX','Steelers',16,'Vikings',6,'AFC'],
+1976:['X','Steelers',21,'Cowboys',17,'AFC'],
+1977:['XI','Raiders',32,'Vikings',14,'AFC'],
+1978:['XII','Cowboys',27,'Broncos',10,'NFC'],
+1979:['XIII','Steelers',35,'Cowboys',31,'AFC'],
+1980:['XIV','Steelers',31,'Rams',19,'AFC'],
+1981:['XV','Raiders',27,'Eagles',10,'AFC'],
+1982:['XVI','49ers',26,'Bengals',21,'NFC'],
+1983:['XVII','Redskins',27,'Dolphins',17,'NFC'],
+1984:['XVIII','Raiders',38,'Redskins',9,'AFC'],
+1985:['XIX','49ers',38,'Dolphins',16,'NFC'],
+1986:['XX','Bears',46,'Patriots',10,'NFC'],
+1987:['XXI','Giants',39,'Broncos',20,'NFC'],
+1988:['XXII','Redskins',42,'Broncos',10,'NFC'],
+1989:['XXIII','49ers',20,'Bengals',16,'NFC'],
+1990:['XXIV','49ers',55,'Broncos',10,'NFC'],
+1991:['XXV','Giants',20,'Bills',19,'NFC'],
+1992:['XXVI','Redskins',37,'Bills',24,'NFC'],
+1993:['XXVII','Cowboys',52,'Bills',17,'NFC'],
+1994:['XXVIII','Cowboys',30,'Bills',13,'NFC'],
+1995:['XXIX','49ers',49,'Chargers',26,'NFC'],
+1996:['XXX','Cowboys',27,'Steelers',17,'NFC'],
+1997:['XXXI','Packers',35,'Patriots',21,'NFC'],
+1998:['XXXII','Broncos',31,'Packers',24,'AFC'],
+1999:['XXXIII','Broncos',34,'Falcons',19,'AFC'],
+2000:['XXXIV','Rams',23,'Titans',16,'NFC'],
+2001:['XXXV','Ravens',34,'Giants',7,'AFC'],
+2002:['XXXVI','Patriots',20,'Rams',17,'AFC'],
+2003:['XXXVII','Buccaneers',48,'Raiders',21,'NFC'],
+2004:['XXXVIII','Patriots',32,'Panthers',29,'AFC'],
+2005:['XXXIX','Patriots',24,'Eagles',21,'AFC'],
+2006:['XL','Steelers',21,'Seahawks',10,'AFC'],
+2007:['XLI','Colts',29,'Bears',17,'AFC'],
+2008:['XLII','Giants',17,'Patriots',14,'NFC'],
+2009:['XLIII','Steelers',27,'Cardinals',23,'AFC'],
+2010:['XLIV','Saints',31,'Colts',17,'NFC'],
+2011:['XLV','Packers',31,'Steelers',25,'NFC'],
+2012:['XLVI','Giants',21,'Patriots',17,'NFC'],
+2013:['XLVII','Ravens',34,'49ers',31,'AFC'],
+2014:['XLVIII','Seahawks',43,'Broncos',8,'NFC']
+}
+
+def statpr(year):
+   hdr=['Bowl #','Winning Team','Winning Score','Losing Team','Losing Score','Winning Conf']
+   print ('{:>14}'.format('Year:'),year)
+   for i in range(len(sbowl[year])):
+         print ('{:>14}'.format(hdr[i]+':'),sbowl[year][i])
+
+y=input("Enter the year of the Super Bowl or 0 for all years: ")
+if y.isalpha():
+   print ('Sorry... numeric input required (first Super Bowl was in 1967)\n')
+else:
+   yr=int(y)
+   if (yr in sbowl):
+      statpr(yr)
+   elif yr==0:
+      for i in range(min(sbowl.keys()),max(sbowl.keys())+1):
+         statpr(i)
+         print ('--------------')
+   else:
+      print (yr, 'not a Superbowl year')
