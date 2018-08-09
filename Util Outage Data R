@@ -1,0 +1,19 @@
+#download the CSV file containing the outage data from openei.org/
+#the database fields are:
+#Utility Company,EIA Utility Id,Twitter Handle,Facebook Page,Outage,Phone Number,Outage Map URL,Phone Number,Web Site
+
+temp <- tempfile()
+download.file("https://openei.org/doe-opendata/dataset/9720c474-5f8a-4c14-b667-ce3cdb484fcb/resource/96ce9a9c-65dd-48c6-a540-1fd56ab0ff47/download/openeiutilitycompanyinfo.csv",temp)
+outagedata <- read.csv(temp)
+unlink(temp)
+attach(outagedata)
+#see the companies listed
+unique(Utility.Company)
+#summary of the data set
+summary(outagedata)
+#view all outage data
+View(outagedata)
+#display data for LADWP - EIA Utility Id 11208 
+ladwp <- outagedata[ which(EIA.Utility.Id==11208),]
+View(ladwp)
+
