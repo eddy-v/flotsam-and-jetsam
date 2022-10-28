@@ -48,7 +48,15 @@ sbowl={
 2011:['XLV','Packers',31,'Steelers',25,'NFC'],
 2012:['XLVI','Giants',21,'Patriots',17,'NFC'],
 2013:['XLVII','Ravens',34,'49ers',31,'AFC'],
-2014:['XLVIII','Seahawks',43,'Broncos',8,'NFC']
+2014:['XLVIII','Seahawks',43,'Broncos',8,'NFC'],
+2015:['XLIX','Patriots',28,'Seahawks',24,'AFC'],
+2016:['50','Broncos',24,'Panthers',10,'AFC'],
+2017:['LI','Patriots',34,'Falcons',28,'AFC'],
+2018:['LII','Eagles',41,'Patriots',33,'NFC'],
+2019:['LIII','Patriots',13,'Rams',3,'AFC'],
+2020:['LIV','Chiefs',31,'49ers',20,'AFC'],
+2021:['LV','Buccaneers',31,'Chiefs',9,'NFC'],
+2022:['LVI','Rams',23,'Bengals',20,'NFC']
 }
 
 def statpr(year):
