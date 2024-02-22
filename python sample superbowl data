@@ -56,7 +56,13 @@ sbowl={
 2019:['LIII','Patriots',13,'Rams',3,'AFC'],
 2020:['LIV','Chiefs',31,'49ers',20,'AFC'],
 2021:['LV','Buccaneers',31,'Chiefs',9,'NFC'],
-2022:['LVI','Rams',23,'Bengals',20,'NFC']
+2022:['LVI','Rams',23,'Bengals',20,'NFC'],
+2023:['LVII','Chiefs',38,'Eagles',35,'AFC'],
+2024:['LVIII','Chiefs',25,'49ers',22,'AFC']
+}
+
+
+
 }
 
 def statpr(year):
