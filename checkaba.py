@@ -1,4 +1,4 @@
-# eddy@eddyvasile.us
+# eddy vasile
 # how to check validity of bank routing number (aba)
 # multiply the first 8 digits with the sequence 3, 7, 1, 3, 7, 1, 3, 7 and add the results
 # the largest multiple of 10 of the sum calculated above must be equal to the 9th digit (checkDigit)
